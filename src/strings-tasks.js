@@ -20,7 +20,7 @@
  *   getStringLength(undefined) => 0
  */
 function getStringLength(value) {
-  if (value === '') return 0;
+  if (typeof value !== 'string') return 0;
   return value.length;
 }
 
@@ -107,8 +107,6 @@ function removeLeadingAndTrailingWhitespaces(value) {
  */
 function removeLeadingWhitespaces(value) {
   const str = value.trimStart(value.replace(/[^\w\s]/gi, ''));
-  // str = str.trimEnd();
-  // str = str.trimStart();
   return str;
 }
 
@@ -123,8 +121,8 @@ function removeLeadingWhitespaces(value) {
  *   removeTrailingWhitespaces('cat ') => 'cat'
  *   removeTrailingWhitespaces('\t\t\tHello, World! ') => '\t\t\tHello, World!'
  */
-function removeTrailingWhitespaces(/* value */) {
-  throw new Error('Not implemented');
+function removeTrailingWhitespaces(value) {
+  return value.trimEnd();
 }
 
 /**
@@ -141,9 +139,8 @@ function removeTrailingWhitespaces(/* value */) {
  *   repeatString('abc', -2) => ''
  */
 function repeatString(str, times) {
-  let value2 = '';
-  for (let i = 1; i <= times; i += 1) value2 += str;
-  return value2;
+  if (times <= 0 || str === '') return '';
+  return str.repeat(times);
 }
 
 /**
@@ -175,7 +172,8 @@ function removeFirstOccurrences(str, value) {
  *   removeLastOccurrences('ABABAB', 'BA') => 'ABAB'.
  */
 function removeLastOccurrences(str, value) {
-  return str.replace(value, '', -1);
+  const zn = str.lastIndexOf(value);
+  return str.slice(zn, value.length);
 }
 
 /**
