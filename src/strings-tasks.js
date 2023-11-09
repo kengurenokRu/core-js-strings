@@ -56,8 +56,7 @@ function isString(value) {
  *   concatenateStrings('', 'bb') => 'bb'
  */
 function concatenateStrings(value1, value2) {
-  const joined = value1 + value2;
-  return joined;
+  return value1.concat(value2);
 }
 
 /**
@@ -72,8 +71,7 @@ function concatenateStrings(value1, value2) {
  *   getFirstChar('') => ''
  */
 function getFirstChar(value) {
-  if (value === '') return '';
-  return value[0];
+  return value.charAt(0);
 }
 
 /**
@@ -156,7 +154,10 @@ function repeatString(str, times) {
  *   removeFirstOccurrences('ABABAB', 'BA') => 'ABAB'.
  */
 function removeFirstOccurrences(str, value) {
-  return str.replace(value, '', 1);
+  // return str.replace(value, '', 1);
+  let zn = str.indexOf(value);
+  if (zn === -1) zn = str.length;
+  return str.slice(0, zn) + str.slice(zn + value.length, str.length);
 }
 
 /**
@@ -172,8 +173,9 @@ function removeFirstOccurrences(str, value) {
  *   removeLastOccurrences('ABABAB', 'BA') => 'ABAB'.
  */
 function removeLastOccurrences(str, value) {
-  const zn = str.lastIndexOf(value);
-  return str.slice(zn, value.length);
+  let zn = str.lastIndexOf(value);
+  if (zn === -1) zn = str.length;
+  return str.slice(0, zn) + str.slice(zn + value.length, str.length);
 }
 
 /**
