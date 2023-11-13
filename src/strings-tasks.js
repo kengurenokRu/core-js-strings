@@ -242,12 +242,9 @@ function endsWith(str, substr) {
  *   formatTime(0, 0) => "00:00"
  */
 function formatTime(minutes, seconds) {
-  let time = '';
-  if (minutes < 10) time = '0';
-  time += `${minutes}:`;
-  if (seconds < 10) time += '0';
-  time += seconds;
-  return time;
+  return `${minutes.toString().padStart(2, '0')}:${seconds
+    .toString()
+    .padStart(2, '0')}`;
 }
 
 /**
@@ -292,8 +289,9 @@ function orderAlphabetically(str) {
  *   containsSubstring('12345', '34') => true
  */
 function containsSubstring(str, substring) {
-  if (str.indexOf(substring) !== -1) return true;
-  return false;
+  /* if (str.indexOf(substring) !== -1) return true;
+  return false; */
+  return str.includes(substring);
 }
 
 /**
@@ -395,13 +393,19 @@ function reverseWords(str) {
  *   invertCase('12345') => '12345'
  */
 function invertCase(str) {
-  let str2 = '';
+  /* let str2 = '';
   for (let i = 0; i <= str.length - 1; i += 1) {
     if (str[i] === str[i].toLocaleLowerCase())
       str2 += str[i].toLocaleUpperCase();
     else str2 += str[i].toLocaleLowerCase();
   }
-  return str2;
+  return str2; */
+  const str2 = str.split('');
+  const str3 = str2.map((el) => {
+    if (el === el.toUpperCase()) return el.toLowerCase();
+    return el.toUpperCase();
+  });
+  return str3.join('');
 }
 
 /**
